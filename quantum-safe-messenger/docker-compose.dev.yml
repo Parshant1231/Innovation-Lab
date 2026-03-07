@@ -1,0 +1,41 @@
+version: '3.9'
+
+# Development overrides — hot reload, exposed ports, no nginx
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  nginx:
+    profiles: ["disabled"]   # disable nginx in dev — access services directly
+
+  frontend:
+    build:
+      target: dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "3000:3000"
+    command: npm run dev
+    environment:
+      - NODE_ENV=development
+
+  backend:
+    build:
+      target: dev
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    ports:
+      - "3001:3001"
+    command: npx nodemon server.js
+    environment:
+      - NODE_ENV=development
+
+  postgres:
+    ports:
+      - "5432:5432"   # expose for local DB tools (TablePlus, pgAdmin etc.)
+
+  redis:
+    ports:
+      - "6379:6379"   # expose for local Redis inspection

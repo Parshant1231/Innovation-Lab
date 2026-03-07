@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 222 47% 4%;
+  --foreground: 214 32% 91%;
+  --card: 222 47% 8%;
+  --card-foreground: 214 32% 91%;
+  --popover: 222 47% 8%;
+  --popover-foreground: 214 32% 91%;
+  --primary: 189 94% 53%;
+  --primary-foreground: 222 47% 4%;
+  --secondary: 222 47% 11%;
+  --secondary-foreground: 214 32% 91%;
+  --muted: 222 47% 11%;
+  --muted-foreground: 215 20% 35%;
+  --accent: 222 47% 11%;
+  --accent-foreground: 189 94% 53%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 222 47% 16%;
+  --input: 222 47% 11%;
+  --ring: 189 94% 53%;
+  --radius: 0rem;
+
+  --qsm-bg: #050810;
+  --qsm-surface: #0b1120;
+  --qsm-card: #0e1628;
+  --qsm-border: #1a2744;
+  --qsm-cyan: #22d3ee;
+  --qsm-blue: #3b82f6;
+  --qsm-green: #10b981;
+}
+
+* {
+  border-color: hsl(var(--border));
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--qsm-bg);
+  color: hsl(var(--foreground));
+  font-family: 'Syne', sans-serif;
+  line-height: 1.6;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--qsm-border); }
+
+/* Selection */
+::selection { background: rgba(34, 211, 238, 0.2); color: var(--qsm-cyan); }
+
+@layer components {
+  .qsm-card {
+    @apply bg-[#0e1628] border border-[#1a2744];
+  }
+  .qsm-input {
+    @apply bg-[#0b1120] border border-[#1a2744] text-slate-200 font-mono text-sm
+           focus:outline-none focus:border-[#22d3ee] focus:ring-1 focus:ring-[#22d3ee]
+           placeholder:text-slate-600 px-3 py-2 w-full transition-colors;
+  }
+  .qsm-btn {
+    @apply bg-[#22d3ee] text-[#050810] font-mono font-bold text-xs tracking-widest
+           uppercase px-6 py-3 hover:bg-[#06b6d4] transition-colors
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .qsm-btn-ghost {
+    @apply border border-[#1a2744] text-slate-400 font-mono text-xs tracking-widest
+           uppercase px-6 py-3 hover:border-[#22d3ee] hover:text-[#22d3ee] transition-colors;
+  }
+  .qsm-label {
+    @apply font-mono text-[10px] text-slate-500 tracking-widest uppercase mb-1 block;
+  }
+  .qsm-error {
+    @apply font-mono text-xs text-red-400 mt-1;
+  }
+}
